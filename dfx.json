@@ -3,14 +3,20 @@
     "ledger": {
       "type": "custom",
       "build": [],
-      "candid": "src/wasm/empty.did",
+      "candid": "src/wasm/ledger.did",
       "wasm": "src/wasm/ledger-canister.wasm"
     },
     "cmc": {
       "type": "custom",
       "build": [],
-      "candid": "src/wasm/empty.did",
-      "wasm": "src/wasm/cycles-minting-canister.wasm"
+      "candid": "src/wasm/cycles-minting-canister.did",
+      "wasm": "src/wasm/cmc.wasm"
+    },
+    "gonvernance": {
+      "type": "custom",
+      "build": [],
+      "candid": "src/wasm/governance-canister.did",
+      "wasm": "src/wasm/gonvernance.wasm"
     }
   },
   "defaults": {
