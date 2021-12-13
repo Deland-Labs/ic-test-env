@@ -32,6 +32,9 @@ const install = () => {
 const createLedgerCanister = () => {
   create();
   install();
+  const getLedgerIdRes = exec("dfx canister --no-wallet id ledger");
+  const ledgerId = purify(getLedgerIdRes.stdout);
+  console.log(`ledger canister created,id is:${ledgerId}`);
 };
 
 export { createLedgerCanister };

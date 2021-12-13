@@ -3,7 +3,7 @@ import { exec } from "shelljs";
 import { convert, purify } from "../utils";
 
 const create = () => {
-  exec("dfx canister --no-wallet create ledger");
+  exec("dfx canister --no-wallet create cmc");
 };
 
 const install = () => {
@@ -18,7 +18,7 @@ const install = () => {
   const installCode = `echo yes | dfx canister --no-wallet  install cmc --argument '(record { 
     ledger_canister_id = principal "${ledgerId}";
     governance_canister_id = principal "${gonvernanceId}"; 
-    minting_account_id =  principal "${dfxAccount}";
+    minting_account_id = opt  "${dfxAccount}";
  })'  --mode reinstall`;
   exec(installCode);
 };
@@ -26,6 +26,9 @@ const install = () => {
 const createCmcCanister = () => {
   create();
   install();
+  const getCmcIdRes = exec("dfx canister --no-wallet id cmc");
+  const cmcId = purify(getCmcIdRes.stdout);
+  console.log(`CMC canister created,id is:${cmcId}`);
 };
 
 export { createCmcCanister };

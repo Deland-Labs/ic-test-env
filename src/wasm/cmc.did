@@ -32,8 +32,8 @@ type LedgerCanisterInitPayload = record {
 
 type CyclesCanisterInitPayload = record {
     ledger_canister_id: principal;
-    governance_canister_id: principal,
-    minting_account_id: Option<AccountIdentifier>,
+    governance_canister_id: principal;
+    minting_account_id: opt AccountIdentifier;
 }
 
 

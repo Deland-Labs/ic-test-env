@@ -9,14 +9,14 @@
     "cmc": {
       "type": "custom",
       "build": [],
-      "candid": "src/wasm/cycles-minting-canister.did",
-      "wasm": "src/wasm/cmc.wasm"
+      "candid": "src/wasm/cmc.did",
+      "wasm": "src/wasm/cycles-minting-canister.wasm"
     },
     "gonvernance": {
       "type": "custom",
       "build": [],
-      "candid": "src/wasm/governance-canister.did",
-      "wasm": "src/wasm/gonvernance.wasm"
+      "candid": "src/wasm/governance.did",
+      "wasm": "src/wasm/governance-canister.wasm"
     }
   },
   "defaults": {

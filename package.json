@@ -18,6 +18,7 @@
     "crc": "^3.8.0",
     "js-sha256": "^0.9.0",
     "node-webcrypto-ossl": "^2.1.1",
+    "protobufjs": "^6.11.2",
     "shelljs": "^0.8.4",
     "yargs": "^15.4.1"
   },
