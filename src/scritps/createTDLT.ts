@@ -5,6 +5,7 @@ const decimals = 18;
 const supply = "100000000";
 const feeRate = 0;
 const feeMinimum = 1;
+// ./src/assets/dft/logo/TDLT.png
 const logo = "TDLT.png";
 
 createDFTCanister(

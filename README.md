@@ -5,11 +5,21 @@ It will automatic start dfx and deploy ledger canister & cycles minting canister
 
 Linux or Mac
 ```
-python -m ensurepip --upgrade
+npm install
 ```
 
-### How to start it?
-```shell
-pip install invoke
-invoke
+Create Ledger Canister
+```
+ts-node src/scritps/createLedger.ts
+```
+
+Create Cycles Minting Canister
+```
+ts-node src/scritps/createLedger.ts
+```
+
+
+Create Test Token of DFT Stanadard 
+```
+ts-node src/scritps/createTDLT.ts
 ```
