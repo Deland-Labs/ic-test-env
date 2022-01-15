@@ -1,7 +1,10 @@
 # ic-test-env
 ## overview
-It will automatic start dfx and deploy ledger canister & cycles minting canister
-### Dependencies？
+
+It is used to help developers create  
+> **Ledger Canister**
+> **Cycles Minting Canister**
+> **DFT Standard Canister**
 
 Linux or Mac
 ```
@@ -23,3 +26,5 @@ Create Test Token of DFT Stanadard
 ```
 ts-node src/scritps/createTDLT.ts
 ```
+
+***createTDLT.ts is a template, you can create your own test token***
