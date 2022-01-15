@@ -4,6 +4,7 @@ import { convert, purify } from "../utils";
 
 const create = () => {
   exec("dfx canister --no-wallet create cmc");
+  exec("dfx canister --no-wallet create gonvernance");
 };
 
 const install = () => {

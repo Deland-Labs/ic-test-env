@@ -17,6 +17,12 @@
       "build": [],
       "candid": "src/wasm/governance.did",
       "wasm": "src/wasm/governance-canister.wasm"
+    },
+    "dft": {
+      "type": "custom",
+      "build": [],
+      "candid": "src/wasm/dft.did",
+      "wasm": "src/wasm/dft.wasm"
     }
   },
   "defaults": {
