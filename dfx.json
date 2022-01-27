@@ -18,11 +18,29 @@
       "candid": "src/wasm/governance.did",
       "wasm": "src/wasm/governance-canister.wasm"
     },
-    "dft": {
+    "II": {
+      "type": "custom",
+      "build": [],
+      "candid": "src/wasm/internet_identity.did",
+      "wasm": "src/wasm/internet_identity.wasm"
+    },
+    "TDLT": {
       "type": "custom",
       "build": [],
       "candid": "src/wasm/dft.did",
-      "wasm": "src/wasm/dft.wasm"
+      "wasm": "src/wasm/dft_basic_opt.wasm"
+    },
+    "TICP": {
+      "type": "custom",
+      "build": [],
+      "candid": "src/wasm/dft.did",
+      "wasm": "src/wasm/dft_basic_opt.wasm"
+    },
+    "TUSDT": {
+      "type": "custom",
+      "build": [],
+      "candid": "src/wasm/dft.did",
+      "wasm": "src/wasm/dft_basic_opt.wasm"
     }
   },
   "defaults": {

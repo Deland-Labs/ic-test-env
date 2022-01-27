@@ -27,22 +27,27 @@ const createCanisters = async (principal) => {
   //console.info(`II Id:${iiId}`);
 };
 import { Command, Option } from "commander";
+import { Principal } from "@dfinity/principal";
 const program = new Command();
 
-program
-  .command("gtt", "generate test tokens")
-  .option("-p, --principal", "your principal to receive test token")
-  .action(async (cmd) => {
-    console.info(`Generating test tokens for ${cmd.principal}`);
-    const principal = cmd.principal;
+program.command("gtt [principal]").action(async (principal) => {
+  try {
+    Principal.fromText(principal);
     await createCanisters(principal);
-  })
-  .command("createLedger", "create a ledger canister")
-  .action(async (cmd) => {
+  } catch (error) {
+    console.error("invalid principal");
+  }
+});
+program
+  .command("createLedger")
+  .description("create a ledger canister")
+  .action(async () => {
     const ledgerId = createLedgerCanister();
     console.info(`Ledger Id:${ledgerId}`);
-  })
-  .command("createCmc", "create a cmc canister")
+  });
+program
+  .command("createCmc")
+  .description("create a cmc canister")
   .action(async (cmd) => {
     const cmcId = createCmcCanister();
     console.info(`CMC Id:${cmcId}`);

@@ -3,20 +3,20 @@ import { exec } from "shelljs";
 import { convert, purify } from "../utils";
 
 const create = () => {
-  exec("dfx canister --no-wallet create cmc");
-  exec("dfx canister --no-wallet create gonvernance");
+  exec("dfx canister create cmc");
+  exec("dfx canister create gonvernance");
 };
 
 const install = () => {
-  const getLedgerIdRes = exec("dfx canister --no-wallet id ledger");
+  const getLedgerIdRes = exec("dfx canister id ledger");
   const ledgerId = purify(getLedgerIdRes.stdout);
   // get gonvernance id
-  const getGonvernanceIdRes = exec("dfx canister --no-wallet id gonvernance");
+  const getGonvernanceIdRes = exec("dfx canister id gonvernance");
   const gonvernanceId = purify(getGonvernanceIdRes.stdout);
   const getDfxPricipalRes = exec("dfx identity  get-principal");
   const dfxPricipal = Principal.fromText(purify(getDfxPricipalRes.stdout));
   const dfxAccount = convert.principalToAccountID(dfxPricipal);
-  const installCode = `echo yes | dfx canister --no-wallet  install cmc --argument '(record { 
+  const installCode = `echo yes | dfx canister  install cmc --argument '(record { 
     ledger_canister_id = principal "${ledgerId}";
     governance_canister_id = principal "${gonvernanceId}"; 
     minting_account_id = opt  "${dfxAccount}";
@@ -27,9 +27,9 @@ const install = () => {
 const createCmcCanister = () => {
   create();
   install();
-  const getCmcIdRes = exec("dfx canister --no-wallet id cmc");
+  const getCmcIdRes = exec("dfx canister id cmc");
   const cmcId = purify(getCmcIdRes.stdout);
-  console.log(`CMC canister created,id is:${cmcId}`);
+  return cmcId;
 };
 
 export { createCmcCanister };

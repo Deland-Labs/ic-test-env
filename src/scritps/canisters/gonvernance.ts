@@ -5,7 +5,7 @@ import { ic_nns_governance } from "../proto/port";
 import { loadProto } from "../proto/index";
 
 const create = () => {
-  exec("dfx canister --no-wallet create gonvernance");
+  exec("dfx canister create gonvernance");
 };
 
 const install = () => {
@@ -154,7 +154,7 @@ const install = () => {
   //       neuron_fees_e8s = 1 :nat64;
   //       transfer = null ;
   //     } } }`;
-  //   const installCode = `echo yes | dfx canister --no-wallet  install gonvernance --argument '(record {
+  //   const installCode = `echo yes | dfx canister  install gonvernance --argument '(record {
   //       default_followees = ${defaultFollowees};
   //       wait_for_quiet_threshold_seconds =  ${24 * 60 * 60} : nat64;
   //       metrics = null ;
@@ -169,7 +169,7 @@ const install = () => {
   //       genesis_timestamp_seconds = 1 : nat64;
   //    })'  --mode reinstall`;
   console.log(pbData);
-  const installCode = `echo yes | dfx canister --no-wallet  
+  const installCode = `echo yes | dfx canister  
    install gonvernance --argument '(vec { ${toNatArrayStr(
      pbData
    )} })'  --mode reinstall`;

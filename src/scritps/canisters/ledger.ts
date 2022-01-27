@@ -3,14 +3,14 @@ import { exec } from "shelljs";
 import { convert, purify } from "../utils";
 
 const create = () => {
-  exec("dfx canister --no-wallet create ledger");
+  exec("dfx canister create ledger");
 };
 
 const install = () => {
   const getDfxPricipalRes = exec("dfx identity  get-principal");
   const dfxPricipal = Principal.fromText(purify(getDfxPricipalRes.stdout));
   const dfxAccount = convert.principalToAccountID(dfxPricipal);
-  const installCode = `echo yes | dfx canister --no-wallet  install ledger --argument '(record { 
+  const installCode = `echo yes | dfx canister  install ledger --argument '(record { 
     send_whitelist = vec { };
     minting_account = "${dfxAccount}"; 
     transaction_window = opt record { secs = ${
@@ -32,9 +32,9 @@ const install = () => {
 const createLedgerCanister = () => {
   create();
   install();
-  const getLedgerIdRes = exec("dfx canister --no-wallet id ledger");
+  const getLedgerIdRes = exec("dfx canister id ledger");
   const ledgerId = purify(getLedgerIdRes.stdout);
-  console.log(`ledger canister created,id is:${ledgerId}`);
+  return ledgerId;
 };
 
 export { createLedgerCanister };

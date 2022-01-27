@@ -15,15 +15,16 @@
     "@types/shelljs": "^0.8.9",
     "agent-js": "^1.0.0",
     "btoa": "^1.2.1",
+    "commander": "^8.3.0",
     "crc": "^3.8.0",
     "js-sha256": "^0.9.0",
     "node-webcrypto-ossl": "^2.1.1",
     "protobufjs": "^6.11.2",
-    "shelljs": "^0.8.4",
-    "yargs": "^15.4.1"
+    "shelljs": "^0.8.4"
   },
   "devDependencies": {
     "@types/node": "^16.11.11",
+    "@types/yargs": "^17.0.8",
     "jest": "^26.4.2",
     "node-fetch": "^2.6.1",
     "ts-jest": "^26.3.0",

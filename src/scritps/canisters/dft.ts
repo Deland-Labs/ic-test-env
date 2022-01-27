@@ -3,8 +3,8 @@ import { exec } from "shelljs";
 import { convert, purify } from "../utils";
 import { readFileSync, existsSync } from "fs";
 
-const create = () => {
-  exec("dfx canister --no-wallet create dft");
+const create = (template: string) => {
+  exec(`dfx canister create ${template}`);
 };
 
 const fileToByteArray = async (filePath) => {
@@ -29,6 +29,7 @@ const uint8ArrayToVecNat8 = (array: Uint8Array) => {
 };
 
 const install = async (
+  template: string,
   name: string,
   symbol: string,
   decimals: number,
@@ -47,8 +48,6 @@ const install = async (
   if (logo) {
     // current directory
     const currentDir = process.cwd();
-
-    console.log(`current directory is:${currentDir}`);
     const path = "./src/assets/dft/logo/" + logo;
     // exist file
     const logoBytes = await fileToByteArray(path);
@@ -59,16 +58,17 @@ const install = async (
   // generate array length as decimals
   // define array ,length 18
   const zeorArray = new Array(decimals).fill(0);
-  const supply = `${totalSupply}${zeorArray.join("")}`; 
+  const supply = `${totalSupply}${zeorArray.join("")}`;
   const installCode =
-    `echo yes|dfx canister --no-wallet  install dft` +
+    `echo yes|dfx canister  install ${template}` +
     ` --argument '(null ,${logoParam} ,"${name}", "${symbol}", ${decimals}:nat8, ${supply}:nat, ` +
-    ` record { minimum = ${feeMinimum} : nat; rate = ${feeRate} : nat }, null)'` +
+    ` record { minimum = ${feeMinimum} : nat; rate = ${feeRate} : nat; rate_decimals= 0 :nat8  }, null)'` +
     ` --mode reinstall`;
   exec(installCode);
 };
 
 const createDFTCanister = async (
+  template: string,
   name: string,
   symbol: string,
   decimals: number,
@@ -77,11 +77,34 @@ const createDFTCanister = async (
   feeMinimum: number,
   logo?: string
 ) => {
-  create();
-  await install(name, symbol, decimals, totalSupply, feeRate, feeMinimum, logo);
-  const getDFTIdRes = exec("dfx canister --no-wallet id dft");
+  create(template);
+  await install(
+    template,
+    name,
+    symbol,
+    decimals,
+    totalSupply,
+    feeRate,
+    feeMinimum,
+    logo
+  );
+  const getDFTIdRes = exec(`dfx canister id ${template}`);
   const dftId = purify(getDFTIdRes.stdout);
-  console.log(`dft canister created,id is:${dftId}`);
+  return dftId;
+};
+
+export const transferDFT = async (
+  template: string,
+  decimals: number,
+  to: string,
+  amount: number
+) => {
+  const cmd = `dfx canister call ${template} transfer '(null,"${to}", ${amount}${Array(
+    decimals
+  )
+    .fill(0)
+    .join("")}:nat,null)'`;
+  exec(cmd);
 };
 
 export { createDFTCanister };
